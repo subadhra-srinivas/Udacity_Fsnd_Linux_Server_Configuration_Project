@@ -1,6 +1,7 @@
 # Udacity_Fsnd_Linux_Server_Configuration_Project
 
 **Introduction**
+
 This project is about making baseline installation of Linux Server and prepare it to host
 Item Catalog web application. The server is secured from number of attack vectors. The
 Apache web server and postgres servers are installed and configured.</br>
@@ -11,6 +12,7 @@ Catalog application.</br>
 IP Address 18.218.86.21</br>
 
 **1. Creating a New User:**
+
    sudo adduser grader</br>
 
    sudo ls /etc/sudoers.d</br>
@@ -20,6 +22,7 @@ IP Address 18.218.86.21</br>
    grader ALL=(ALL) NOPASSWD:ALL</br>
 
 **2. Public Key Encryption:**
+
    We will generate our key pair on our local machine using ssh-keygen</br>
 
    the file name for key is linuxserver</br>
@@ -46,14 +49,17 @@ IP Address 18.218.86.21</br>
    ssh grader@18.218.86.21 -p 2200 -i ~/.ssh/linuxserver</br>
 
 **3. Disable password based Authentication:**
+
    Edit the sshd_config file</br>
    sudo vim /etc/ssh/sshd_config</br>
 
 **4. Change the Port to 2200:**
+
    Set the PasswordAuthentication no</br>
    Edit the Port to 2200 insted of 22</br>
 
 **5. Diable Root login:**
+
    Edit /etc/ssh/ssh_config</br>
    Set PermitRootLogin no</br>
 
@@ -61,6 +67,7 @@ IP Address 18.218.86.21</br>
    sudo service ssh restart</br>
 
 **6. Upgrading installed packages**
+
    All of the available package source are listed in the file</br>
    cat /etc/apt/sources.list</br>
    Updating available package list</br>
@@ -69,6 +76,7 @@ IP Address 18.218.86.21</br>
    sudo apt-get upgrade</br>
 
 **7. Configure uncomplicated Firewall (UFW):**
+
    configure ufw to allow incoming connections from ssh, http and ntp</br>
    To check the status of firewall</br>
    sudo ufw status</br>
@@ -80,15 +88,18 @@ IP Address 18.218.86.21</br>
    sudo ufw enable</br>
 
 **8. Configure local timezone**
+
    sudo dpkg-reconfigure tzdata</br>
    select the continent and select the timezone</br>
 
 **9. Install and Configure Apache**
+
    sudo apt-get install apache2</br>
    sudo apt-get install libapache2-mod-wsgi</br>
    sudo service apache2 restart</br>
 
 **10. Install and Configure Postgres sql**
+
     Install PostgreSQL sudo apt-get install postgresql</br>
     Check if no remote connections are allowed sudo vim /etc/postgresql/9.6/main/pg_hba.conf</br>
     sudo su - postgres</br>
@@ -103,9 +114,11 @@ IP Address 18.218.86.21</br>
     grant all on database catalog to catalog;</br>
 
 **11. Install Git**
+
     Install Git using sudo apt-get install git</br>
 
 **12. Install Flask, SQLAlchemy, etc**
+
     Give the following commands:
 
     sudo apt-get install python-psycopg2 python-flask>
@@ -115,6 +128,7 @@ IP Address 18.218.86.21</br>
     sudo pip install httplib2
 
 **13. Clone and setup Catalog App:**
+
     cd /var/www/
 
     Clone the catalog App to the Virtual machine
@@ -155,6 +169,7 @@ IP Address 18.218.86.21</br>
     Create the database schema by running the sudo python database_setup.py
 
 **14. Create and enable a new virtual host**
+
     1. Create FlaskApp.conf and edit
        sudo vim /etc/apache2.sites-available/FlaskApp.conf
 
@@ -197,9 +212,10 @@ IP Address 18.218.86.21</br>
        application.secret_key = 'Add your secret key'
 
 **16. Restart Apache**
-    Restart Apache sudo service apache2 restart
 
-    **References:**
+      Restart Apache sudo service apache2 restart
+
+**References:**
 
     https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
     https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
