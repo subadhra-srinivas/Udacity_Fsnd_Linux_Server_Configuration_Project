@@ -106,101 +106,101 @@ IP Address 18.218.86.21</br>
     Install Git using sudo apt-get install git</br>
 
 **12. Install Flask, SQLAlchemy, etc**
-    Give the following commands:</br>
+    Give the following commands:
 
-    sudo apt-get install python-psycopg2 python-flask</br>
-    sudo apt-get install python-sqlalchemy python-pip</br>
-    sudo pip install oauth2client</br>
-    sudo pip install requests</br>
-    sudo pip install httplib2</br>
+    sudo apt-get install python-psycopg2 python-flask>
+    sudo apt-get install python-sqlalchemy python-pip
+    sudo pip install oauth2client
+    sudo pip install requests
+    sudo pip install httplib2
 
 **13. Clone and setup Catalog App:**
-    cd /var/www/</br>
+    cd /var/www/
 
-    Clone the catalog App to the Virtual machine</br>
-    git clone https://github.com/subadhra-srinivas/Udacity_Fsnd_Item_Catalog_Project.git</br>
+    Clone the catalog App to the Virtual machine
+    git clone https://github.com/subadhra-srinivas/Udacity_Fsnd_Item_Catalog_Project.git
 
-    sudo mkdir FlaskApp cd FlaskApp</br>
-    Make another FlaskApp directory</br>
-    sudo mkdir FlaskApp cd FlaskApp</br>
+    sudo mkdir FlaskApp cd FlaskApp
+    Make another FlaskApp directory
+    sudo mkdir FlaskApp cd FlaskApp
 
-    Move all the files from catalog directory to second FlaskApp directory</br>
+    Move all the files from catalog directory to second FlaskApp directory
 
-    Rename item_catalog_project.py to __init__.py</br>
+    Rename item_catalog_project.py to __init__.py
 
     Change the engine = create_engine('postgres//catalog:password@localhost/catalog') in __init__.py,
     databse_setup.py and lotsofmenu.py
 
     Change the directory stucture for client_secrets.json and fb_client_secrets.json to
-    /var/www/FlaskApp/FlaskApp/client_secrets.json</br>
+    /var/www/FlaskApp/FlaskApp/client_secrets.json
 
-    /var/www/FlaskApp/FlaskApp/fb_client_secrets.json</br>
-    Make this change in fbconnect and gconnect functions also</br>
+    /var/www/FlaskApp/FlaskApp/fb_client_secrets.json
+    Make this change in fbconnect and gconnect functions also
 
-    Change the host = 'ec2-18-218-86-21.us-east-2.compute.amazonaws.com' and port 80</br>
+    Change the host = 'ec2-18-218-86-21.us-east-2.compute.amazonaws.com' and port 80
 
-    Update the Google OAuth client secrets file</br>
-    Update the redirect_uri's and javascript_origins</br>
-    "redirect_uris":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/login",</br>
-		     "http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/gconnect"],</br>
-    "javascript_origins":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com"]</br>
+    Update the Google OAuth client secrets file
+    Update the redirect_uri's and javascript_origins
+    "redirect_uris":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/login",
+		     "http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/gconnect"],
+    "javascript_origins":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com"]
 
-    Update the Facebook OAuth client secrets file</br>
-    Update the Facebook information from the https://developers.facebook.com/</br>
-    on the Settings page, the website URL needs to read http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com.</br>
-    Then in the "Advanced" tab, in the "Client OAuth Settings" section, add</br> 
-    http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com and 18.218.86.21 to the "Valid OAuth redirect URIs"</br>
-    field. Then save these changes.</br>
+    Update the Facebook OAuth client secrets file
+    Update the Facebook information from the https://developers.facebook.com/
+    on the Settings page, the website URL needs to read http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com.
+    Then in the "Advanced" tab, in the "Client OAuth Settings" section, add 
+    http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com and 18.218.86.21 to the "Valid OAuth redirect URIs"
+    field. Then save these changes.
 
-    Create the database schema by running the sudo python database_setup.py</br>
+    Create the database schema by running the sudo python database_setup.py
 
 **14. Create and enable a new virtual host**
-    1. Create FlaskApp.conf and edit</br>
-       sudo vim /etc/apache2.sites-available/FlaskApp.conf</br>
+    1. Create FlaskApp.conf and edit
+       sudo vim /etc/apache2.sites-available/FlaskApp.conf
 
-    2. Add the following lines of code save and close</br>
+    2. Add the following lines of code save and close
 
-       <VirtualHost *:80></br>
-                ServerName 18.218.86.21</br>
-                ServerAdmin subadhra.srinivas@gmail.com</br>
-                WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi</br>
-                <Directory /var/www/FlaskApp/FlaskApp/></br>
-                        Order allow,deny</br>
-                        Allow from all</br>
-                </Directory></br>
-                Alias /static /var/www/FlaskApp/FlaskApp/static</br>
-                <Directory /var/www/FlaskApp/FlaskApp/static/></br>
-                        Order allow,deny</br>
-                        Allow from all</br>
-                </Directory></br>
-                ErrorLog ${APACHE_LOG_DIR}/error.log</br>
-                LogLevel warn</br>
-                CustomLog ${APACHE_LOG_DIR}/access.log combined</br>
-       </VirtualHost></br>
+       <VirtualHost *:80>
+                ServerName 18.218.86.21
+                ServerAdmin subadhra.srinivas@gmail.com
+                WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
+                <Directory /var/www/FlaskApp/FlaskApp/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                Alias /static /var/www/FlaskApp/FlaskApp/static
+                <Directory /var/www/FlaskApp/FlaskApp/static/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+       </VirtualHost>
 
     3. Enable the virtual host with the following command</br>
-       sudo a2ensite FlaskApp</br>
+       sudo a2ensite FlaskApp
 
 **15. Create the .wsgi file**
 
     1. Move to /var/www/FlaskApp</br>
-       sudo vim flaskapp.wsgi</br>
+       sudo vim flaskapp.wsgi
     2. Add the following lines of code</br>
 
-       #!/usr/bin/python</br>
-       import sys</br>
-       import logging</br>
-       logging.basicConfig(stream=sys.stderr)</br>
-       sys.path.insert(0,"/var/www/FlaskApp/")</br>
+       #!/usr/bin/python
+       import sys
+       import logging
+       logging.basicConfig(stream=sys.stderr)
+       sys.path.insert(0,"/var/www/FlaskApp/")
 
-       from FlaskApp import app as application</br>
-       application.secret_key = 'Add your secret key'</br>
+       from FlaskApp import app as application
+       application.secret_key = 'Add your secret key'
 
 **16. Restart Apache**
-    Restart Apache sudo service apache2 restart</br>
+    Restart Apache sudo service apache2 restart
 
     **References:**
 
-    https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps</br>
-    https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps</br>
+    https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+    https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
 
