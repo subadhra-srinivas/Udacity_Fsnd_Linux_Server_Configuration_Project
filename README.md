@@ -102,20 +102,20 @@ IP Address 18.218.86.21</br>
 
     Install PostgreSQL sudo apt-get install postgresql</br>
     Check if no remote connections are allowed sudo vim /etc/postgresql/9.6/main/pg_hba.conf</br>
-    sudo su - postgres</br>
-    psql</br>
-    create database catalog;</br>
-    create user catalog;</br>
-    create role catalog with password ‘password’;</br>
-    alter role catalog with password ‘password’;</br>
-    revoke all on schema public from public;</br>
-    grant all on schema public to catalog;</br>
-    alter user catalog with login;</br>
-    grant all on database catalog to catalog;</br>
+    sudo su - postgres
+    psql
+    create database catalog;
+    create user catalog;
+    create role catalog with password ‘password’;
+    alter role catalog with password ‘password’;
+    revoke all on schema public from public;
+    grant all on schema public to catalog;
+    alter user catalog with login;
+    grant all on database catalog to catalog;
 
 **11. Install Git**
 
-    Install Git using sudo apt-get install git</br>
+    Install Git using sudo apt-get install git
 
 **12. Install Flask, SQLAlchemy, etc**
 
