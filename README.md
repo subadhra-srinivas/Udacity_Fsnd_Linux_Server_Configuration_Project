@@ -141,12 +141,16 @@ IP Address 18.218.86.21</br>
 
     Update the Google OAuth client secrets file</br>
     Update the redirect_uri's and javascript_origins</br>
-    "redirect_uris":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/login","http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/gconnect"],"javascript_origins":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com"]</br>
+    "redirect_uris":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/login",</br>
+		     "http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com/gconnect"],</br>
+    "javascript_origins":["http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com"]</br>
 
     Update the Facebook OAuth client secrets file</br>
     Update the Facebook information from the https://developers.facebook.com/</br>
     on the Settings page, the website URL needs to read http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com.</br>
-    Then in the "Advanced" tab, in the "Client OAuth Settings" section, add http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com and 18.218.86.21 to the "Valid OAuth redirect URIs" field. Then save these changes.</br>
+    Then in the "Advanced" tab, in the "Client OAuth Settings" section, add</br> 
+    http://ec2-18-218-86-21.us-east-2.compute.amazonaws.com and 18.218.86.21 to the "Valid OAuth redirect URIs"</br>
+    field. Then save these changes.</br>
 
     Create the database schema by running the sudo python database_setup.py</br>
 
